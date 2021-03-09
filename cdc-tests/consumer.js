@@ -34,7 +34,7 @@ describe("Pact", () => {
         willRespondWith: {
           status: 200,
           body: {
-            todos: [{ text: "Buy some milk", done: true }],
+            todos: [{ text: "Buy some milk", done: false }],
           },
         },
       })
@@ -43,7 +43,7 @@ describe("Pact", () => {
     it("generates a list of TODO items", async () => {
       const todoItems = await axios.get("http://localhost:1234/todos-list");
       expect(todoItems.data).to.deep.equal({
-        todos: [{ text: "Buy some milk", done: true }],
+        todos: [{ text: "Buy some milk", done: false }],
       });
     });
   });
@@ -55,10 +55,12 @@ describe("Pact", () => {
         withRequest: {
           method: "POST",
           path: "/todo-items",
-          body: { text: "Buy some milk", done: true },
+          body: { text: "Buy some milk", done: false },
         },
         willRespondWith: {
           status: 200,
+          headers: { "Content-Type": "application/json" },
+          body: { text: "Buy some milk", done: false },
         },
       })
     );
@@ -67,11 +69,15 @@ describe("Pact", () => {
       chai
         .request("http://localhost:1234")
         .post("/todo-items")
-        .send({ text: "Buy some milk", done: true })
+        .set("Content-Type", "application/json")
+        .send({ text: "Buy some milk", done: false })
         .end(function (err, res) {
-          console.log(res.status);
           expect(err).to.be.null;
           expect(res).to.have.status(200);
+          expect(res.body).to.deep.equal({
+            text: "Buy some milk",
+            done: false,
+          });
         });
     });
   });

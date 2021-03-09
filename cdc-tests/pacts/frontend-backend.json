@@ -20,7 +20,7 @@
           "todos": [
             {
               "text": "Buy some milk",
-              "done": true
+              "done": false
             }
           ]
         }
@@ -33,12 +33,17 @@
         "path": "/todo-items",
         "body": {
           "text": "Buy some milk",
-          "done": true
+          "done": false
         }
       },
       "response": {
         "status": 200,
         "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "text": "Buy some milk",
+          "done": false
         }
       }
     }
