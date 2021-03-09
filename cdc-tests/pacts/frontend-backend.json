@@ -1,0 +1,51 @@
+{
+  "consumer": {
+    "name": "frontend"
+  },
+  "provider": {
+    "name": "backend"
+  },
+  "interactions": [
+    {
+      "description": "a request for all the todo items",
+      "request": {
+        "method": "GET",
+        "path": "/todos-list"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "todos": [
+            {
+              "text": "Buy some milk",
+              "done": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "a request to add a new todo item",
+      "request": {
+        "method": "POST",
+        "path": "/todo-items",
+        "body": {
+          "text": "Buy some milk",
+          "done": true
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

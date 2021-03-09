@@ -1,0 +1,23 @@
+{
+  "name": "cdc-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:consumer": "mocha consumer.js --timeout 20000",
+    "test:provider": "mocha provider.js --timeout 20000",
+    "posttest:consumer": "node publish.pact.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@pact-foundation/pact": "^9.15.1",
+    "axios": "^0.21.1",
+    "chai": "^4.3.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^8.3.0"
+  }
+}
