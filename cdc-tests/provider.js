@@ -4,11 +4,17 @@ const axios = require("axios");
 require("dotenv").config({ path: __dirname + `/../.env` });
 
 const app = require("express")();
-
+var apiserver = require("../backend/server");
+app.use(apiserver);
+app.use(axios);
 const server = app.listen("5000");
 
 describe("Pact Verification", () => {
   it("validates the expectations of frontend", () => {
+    axios.post("http://localhost:5000/todo-items", {
+      text: "Buy some milk",
+      done: false,
+    });
     const opts = {
       logLevel: "INFO",
       providerBaseUrl: "http://localhost:5000",

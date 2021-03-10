@@ -33,18 +33,24 @@ describe("Pact", () => {
         },
         willRespondWith: {
           status: 200,
-          body: {
-            todos: [{ text: "Buy some milk", done: false }],
-          },
+          body: [
+            {
+              text: "Buy some milk",
+              done: false,
+            },
+          ],
         },
       })
     );
 
     it("generates a list of TODO items", async () => {
       const todoItems = await axios.get("http://localhost:1234/todos-list");
-      expect(todoItems.data).to.deep.equal({
-        todos: [{ text: "Buy some milk", done: false }],
-      });
+      expect(todoItems.data).to.deep.equal([
+        {
+          text: "Buy some milk",
+          done: false,
+        },
+      ]);
     });
   });
 
@@ -55,11 +61,12 @@ describe("Pact", () => {
         withRequest: {
           method: "POST",
           path: "/todo-items",
+          headers: { "Content-Type": "application/json" },
           body: { text: "Buy some milk", done: false },
         },
         willRespondWith: {
           status: 200,
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json; charset=utf-8" },
           body: { text: "Buy some milk", done: false },
         },
       })

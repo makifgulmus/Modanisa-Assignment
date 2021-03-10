@@ -16,14 +16,12 @@
         "status": 200,
         "headers": {
         },
-        "body": {
-          "todos": [
-            {
-              "text": "Buy some milk",
-              "done": false
-            }
-          ]
-        }
+        "body": [
+          {
+            "text": "Buy some milk",
+            "done": false
+          }
+        ]
       }
     },
     {
@@ -31,6 +29,9 @@
       "request": {
         "method": "POST",
         "path": "/todo-items",
+        "headers": {
+          "Content-Type": "application/json"
+        },
         "body": {
           "text": "Buy some milk",
           "done": false
@@ -39,7 +40,7 @@
       "response": {
         "status": 200,
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json; charset=utf-8"
         },
         "body": {
           "text": "Buy some milk",
