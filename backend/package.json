@@ -4,17 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:integration": "mocha  tests/integration/*.test.js"
+    "test:integration": "mocha  tests/integration/*.test.js",
+    "test:unit": "mocha  tests/unit/*.test.js",
+    "dev": "nodemon server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chai-http": "^4.3.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mocha": "^8.3.1"
+    "mocha": "^8.3.1",
+    "sinon": "^9.2.4",
+    "sinon-test": "^3.0.0"
   },
   "devDependencies": {
-    "chai": "^4.3.3"
+    "chai": "^4.3.3",
+    "nodemon": "^2.0.7"
   }
 }
