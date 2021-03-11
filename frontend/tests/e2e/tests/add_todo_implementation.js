@@ -1,25 +1,8 @@
 /* globals gauge*/
 "use strict";
 const path = require("path");
-const {
-  openBrowser,
-  write,
-  closeBrowser,
-  goto,
-  press,
-  screenshot,
-  above,
-  click,
-  focus,
-  checkBox,
-  listItem,
-  toLeftOf,
-  link,
-  text,
-  into,
-  textBox,
-  evaluate,
-} = require("taiko");
+const expect = require("expect");
+const { $, openBrowser, write, closeBrowser, goto, click } = require("taiko");
 const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === "true";
 
@@ -32,20 +15,23 @@ beforeSuite(async () => {
 afterSuite(async () => {
   await closeBrowser();
 });
-step("When I go to the app, I should see an empty todo form", async (item) => {
+step("When I go to the app, I should see an empty todo form", async () => {
   await goto("localhost:8080");
-  await assert.ok(await text("What to do?").exists());
-  await assert.ok(await button("Add Item").exists());
+  const inputText = await $("#todoInput");
+  const addButton = await $("#addButton");
+  expect(inputText).toBeTruthy();
+  expect(addButton).toBeTruthy();
 });
 
 step(
   "When I write buy some milk to text box and click to add button",
-  async (item) => {
+  async () => {
     await write("Buy some milk");
     await click("Add Item");
   }
 );
 
-step("Then I should see buy some milk item in ToDo list", async (item) => {
-  await assert.ok(await text("Buy some milk").exists());
+step("Then I should see buy some milk item in ToDo list", async () => {
+  const todoButton = await $(".todoItem");
+  expect(todoButton).toBeTruthy();
 });

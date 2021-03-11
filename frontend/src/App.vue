@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <add-item> </add-item>
+    <todo-items></todo-items>
   </div>
 </template>
 
 <script>
+import TodoItems from "./components/TodoItems";
 import AddItem from "./components/AddItem.vue";
 
 export default {
   name: "App",
   components: {
     AddItem,
+    TodoItems,
   },
 };
 </script>
