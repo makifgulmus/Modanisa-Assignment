@@ -1,9 +1,6 @@
-/* globals gauge*/
 "use strict";
-const path = require("path");
 const expect = require("expect");
 const { $, openBrowser, write, closeBrowser, goto, click } = require("taiko");
-const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === "true";
 
 beforeSuite(async () => {
@@ -32,6 +29,6 @@ step(
 );
 
 step("Then I should see buy some milk item in ToDo list", async () => {
-  const todoButton = await $(".todoItem");
-  expect(todoButton).toBeTruthy();
+  const todoItem = await $(".todoItem");
+  expect(todoItem).toBeTruthy();
 });
