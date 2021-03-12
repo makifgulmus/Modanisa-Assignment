@@ -47,6 +47,53 @@
           "done": false
         }
       }
+    },
+    {
+      "description": "a request to update status of a todo item",
+      "request": {
+        "method": "PUT",
+        "path": "/todo-items",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "text": "Buy some milk",
+          "done": false
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "text": "Buy some milk",
+          "done": true
+        }
+      }
+    },
+    {
+      "description": "a request to delete a todo item",
+      "request": {
+        "method": "DELETE",
+        "path": "/todo-items",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "text": "Buy some milk",
+          "done": false
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "msg": "Todo Deleted"
+        }
+      }
     }
   ],
   "metadata": {

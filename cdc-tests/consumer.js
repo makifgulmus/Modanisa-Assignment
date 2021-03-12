@@ -88,4 +88,71 @@ describe("Pact", () => {
         });
     });
   });
+
+  describe("put request to update todo status", () => {
+    before(() =>
+      provider.addInteraction({
+        uponReceiving: "a request to update status of a todo item",
+        withRequest: {
+          method: "PUT",
+          path: "/todo-items",
+          headers: { "Content-Type": "application/json" },
+          body: { text: "Buy some milk", done: false },
+        },
+        willRespondWith: {
+          status: 200,
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: { text: "Buy some milk", done: true },
+        },
+      })
+    );
+
+    it("correctly updates the status of todo item", async () => {
+      chai
+        .request("http://localhost:1234")
+        .put("/todo-items")
+        .set("Content-Type", "application/json")
+        .send({ text: "Buy some milk", done: false })
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.deep.equal({
+            text: "Buy some milk",
+            done: true,
+          });
+        });
+    });
+  });
+
+  describe("delete request to remove a todo", () => {
+    before(() =>
+      provider.addInteraction({
+        uponReceiving: "a request to delete a todo item",
+        withRequest: {
+          method: "DELETE",
+          path: "/todo-items",
+          headers: { "Content-Type": "application/json" },
+          body: { text: "Buy some milk", done: false },
+        },
+        willRespondWith: {
+          status: 200,
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: { msg: "Todo Deleted" },
+        },
+      })
+    );
+
+    it("correctly deletes a todo item", async () => {
+      chai
+        .request("http://localhost:1234")
+        .delete("/todo-items")
+        .set("Content-Type", "application/json")
+        .send({ text: "Buy some milk", done: false })
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.deep.equal({ msg: "Todo Deleted" });
+        });
+    });
+  });
 });
