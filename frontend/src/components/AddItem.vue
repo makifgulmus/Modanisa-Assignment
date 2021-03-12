@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     itemAdded(newTodo) {
-      console.log(newTodo);
       axios.post("/api/todo-items", {
         text: `${newTodo}`,
         done: false,

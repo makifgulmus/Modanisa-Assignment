@@ -1,20 +1,42 @@
 <template>
-  <div class="todoItem">
-    <span>
+  <div v-bind:class="{ todoItemDone: isDone, todoItemNotDone: !isDone }">
+    <span @click="changeTodoStatus">
       {{ todo.text }}
     </span>
-    <input type="checkbox" id="checkbox" />
+    <input
+      type="checkbox"
+      id="checkbox"
+      v-model="checked"
+      @click="changeTodoStatus"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["todo", "todotext"],
+  data() {
+    return {
+      checked: false,
+      isDone: false,
+    };
+  },
+  props: ["todo"],
+  methods: {
+    changeTodoStatus() {
+      this.isDone = !this.isDone;
+      this.checked = !this.checked;
+    },
+  },
 };
 </script>
 
 <style>
-.todoItem {
+.todoItemDone {
+  display: flex;
+  justify-content: center;
+  text-decoration: line-through;
+}
+.todoItemNotDone {
   display: flex;
   justify-content: center;
 }

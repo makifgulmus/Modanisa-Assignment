@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import SingleItem from "./SingleItem.vue";
 export default {
   data() {
@@ -17,14 +18,12 @@ export default {
 
   methods: {
     async getTodos() {
-      await fetch(`/api/todos-list`)
-        .then((response) => response.json())
-        .then((response) => {
-          response.forEach((item) => {
-            this.todos.push(item);
-          });
-        })
-        .catch((error) => console.log(error));
+      var vm = this;
+      await axios.get(`/api/todos-list`).then(function(response) {
+        response.data.forEach((item) => {
+          vm.todos.push(item);
+        });
+      });
     },
   },
 
