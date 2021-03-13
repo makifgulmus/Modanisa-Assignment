@@ -13,4 +13,16 @@ module.exports = {
     todos.set(todo_text, todo_status);
     return { text: todo_text, done: todo_status };
   },
+
+  updateTodo: function (todo_text, todo_status) {
+    todos.set(todo_text, !todo_status);
+    return { text: todo_text, done: !todo_status };
+  },
+
+  deleteTodo: function (todo_text) {
+    todos.delete(todo_text);
+    return {
+      msg: "Todo Deleted",
+    };
+  },
 };

@@ -15,4 +15,14 @@ router.post("/todo-items", (req, res) => {
   res.status(200).json(services.createTodo(`${req.body.text}`, req.body.done));
 });
 
+router.put("/todo-items", (req, res) => {
+  res.set("Content-Type", "application/json; charset=utf-8");
+  res.status(200).json(services.updateTodo(`${req.body.text}`, req.body.done));
+});
+
+router.delete("/todo-items", (req, res) => {
+  res.set("Content-Type", "application/json; charset=utf-8");
+  res.status(200).json(services.deleteTodo(`${req.body.text}`));
+});
+
 module.exports = router;
