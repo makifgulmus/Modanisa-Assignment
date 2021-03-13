@@ -4,16 +4,16 @@ chai.use(chaiHttp);
 const server = require("../../server");
 const should = chai.should();
 const expect = chai.expect;
+const axios = require("axios");
 
-describe("Testing POST /todo-items", () => {
-  it("captures the post request and adds a new todo item", function (done) {
+describe("Testing GET /todos-list", () => {
+  it("captures the get request and returns todo items", function (done) {
     chai
       .request(server)
-      .post("/todo-items")
-      .send({ text: "Buy some milk", done: false })
+      .get("/todos-list")
       .end((err, res) => {
         res.should.have.status(200);
-        expect(res.body).to.deep.equal({ text: "Buy some milk", done: false });
+        expect(res.body).to.deep.equal([]);
         done();
       });
   });

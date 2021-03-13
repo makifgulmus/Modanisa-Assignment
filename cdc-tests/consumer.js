@@ -132,7 +132,6 @@ describe("Pact", () => {
           method: "DELETE",
           path: "/todo-items",
           headers: { "Content-Type": "application/json" },
-          body: { text: "Buy some milk", done: false },
         },
         willRespondWith: {
           status: 200,
@@ -147,7 +146,6 @@ describe("Pact", () => {
         .request("http://localhost:1234")
         .delete("/todo-items")
         .set("Content-Type", "application/json")
-        .send({ text: "Buy some milk", done: false })
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);

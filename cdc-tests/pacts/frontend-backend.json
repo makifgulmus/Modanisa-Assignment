@@ -79,10 +79,6 @@
         "path": "/todo-items",
         "headers": {
           "Content-Type": "application/json"
-        },
-        "body": {
-          "text": "Buy some milk",
-          "done": false
         }
       },
       "response": {
