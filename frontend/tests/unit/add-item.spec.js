@@ -1,5 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import AddItem from "../../src/components/AddItem.vue";
+import { itemAdded } from "../../src/components/AddItem";
 require("jest-fetch-mock").enableMocks();
 
 describe("Rendering properly and having the correct elements", () => {
@@ -19,15 +20,20 @@ describe("Rendering properly and having the correct elements", () => {
     expect(addItemForm.length).toBe(1);
     expect(addItemButton.length).toBe(1);
   });
-  it("triggers post request when new item is added", () => {
-    const itemAdded = jest.fn();
-    wrapper.setMethods({ itemAdded });
-    itemAdded.mockReturnValue({
-      text: "Buy some milk",
-      done: false,
-    });
-    const addItemButton = wrapper.findAll("#addButton");
-    addItemButton.trigger("click");
-    expect(itemAdded).toBeCalled();
+  it("triggers post request when new item is added", async () => {
+    await wrapper.setData({ newTodo: "Buy some milk" });
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            text: "Buy some milk",
+            done: false,
+          }),
+      })
+    );
+    const addItemButtons = wrapper.findAll("#addButton");
+    expect(addItemButtons).toHaveLength(1);
+    addItemButtons.at(0).trigger("click");
+    expect(wrapper.vm.newTodo).toBe("");
   });
 });

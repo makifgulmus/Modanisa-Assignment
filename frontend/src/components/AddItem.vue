@@ -29,11 +29,14 @@ export default {
   },
   methods: {
     itemAdded(newTodo) {
-      axios.post("/api/todo-items", {
-        text: `${newTodo}`,
-        done: false,
-      });
-      this.$refs["todoInput"].value = "";
+      if (newTodo.length > 1) {
+        axios.post("/api/todo-items", {
+          text: `${newTodo}`,
+          done: false,
+        });
+        this.newTodo = "";
+        this.$refs["todoInput"].value = "";
+      }
     },
   },
 };

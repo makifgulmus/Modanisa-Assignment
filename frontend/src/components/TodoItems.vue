@@ -1,7 +1,11 @@
 <template>
   <div>
     <ul v-for="todo in todos" :key="todo.text">
-      <single-item :todo="todo"></single-item>
+      <single-item
+        :todo="todo"
+        @todo-updated="updateTodo"
+        @todo-deleted="deleteTodo"
+      ></single-item>
     </ul>
   </div>
 </template>
@@ -16,6 +20,11 @@ export default {
     };
   },
 
+  components: { SingleItem },
+  async created() {
+    this.getTodos();
+  },
+
   methods: {
     async getTodos() {
       var vm = this;
@@ -25,11 +34,24 @@ export default {
         });
       });
     },
-  },
-
-  components: { SingleItem },
-  async created() {
-    this.getTodos();
+    async updateTodo(todoToUpdate) {
+      await axios.put("/api/todo-items", {
+        text: todoToUpdate.text,
+        done: todoToUpdate.done,
+      });
+    },
+    async deleteTodo(todoToDelete) {
+      for (var i = 0; i < this.todos.length; i++) {
+        if (JSON.parse(JSON.stringify(this.todos[i].text)) === todoToDelete) {
+          this.todos.splice(i, 1);
+        }
+      }
+      await axios.delete("/api/todo-items", {
+        data: {
+          text: `${todoToDelete}`,
+        },
+      });
+    },
   },
 };
 </script>
