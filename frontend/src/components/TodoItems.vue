@@ -28,14 +28,16 @@ export default {
   methods: {
     async getTodos() {
       var vm = this;
-      await axios.get(`/api/todos-list`).then(function(response) {
-        response.data.forEach((item) => {
-          vm.todos.push(item);
+      await axios
+        .get(`${process.env.VUE_APP_HOST_URL}/todos-list`)
+        .then(function(response) {
+          response.data.forEach((item) => {
+            vm.todos.push(item);
+          });
         });
-      });
     },
     async updateTodo(todoToUpdate) {
-      await axios.put("/api/todo-items", {
+      await axios.put(`${process.env.VUE_APP_HOST_URL}/todo-items`, {
         text: todoToUpdate.text,
         done: todoToUpdate.done,
       });
@@ -46,7 +48,7 @@ export default {
           this.todos.splice(i, 1);
         }
       }
-      await axios.delete("/api/todo-items", {
+      await axios.delete(`${process.env.VUE_APP_HOST_URL}/todo-items`, {
         data: {
           text: `${todoToDelete}`,
         },

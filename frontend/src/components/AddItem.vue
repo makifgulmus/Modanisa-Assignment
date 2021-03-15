@@ -30,7 +30,7 @@ export default {
   methods: {
     itemAdded(newTodo) {
       if (newTodo.length > 1) {
-        axios.post("/api/todo-items", {
+        axios.post(`${process.env.VUE_APP_HOST_URL}/todo-items`, {
           text: `${newTodo}`,
           done: false,
         });

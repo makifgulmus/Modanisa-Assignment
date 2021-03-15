@@ -25,7 +25,7 @@ describe("Rendering and functioning correctly", () => {
   });
 
   it("calls the fetch method when it gets created", async () => {
-    moxios.stubRequest(`/api/todos-list`, {
+    moxios.stubRequest(`http://35.224.219.240/todos-list`, {
       status: 200,
       response: [
         {
@@ -53,7 +53,7 @@ describe("Rendering and functioning correctly", () => {
         },
       ],
     });
-    moxios.stubRequest("/api/todo-items", {
+    moxios.stubRequest("http://35.224.219.240/todo-items", {
       status: 200,
       response: {
         text: "Buy some milk",
@@ -81,7 +81,7 @@ describe("Rendering and functioning correctly", () => {
         },
       ],
     });
-    moxios.stubRequest("/api/todo-items", {
+    moxios.stubRequest("http://35.224.219.240/todo-items", {
       status: 200,
       response: {
         msg: "Todo Deleted",
