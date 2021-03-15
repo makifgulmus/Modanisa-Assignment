@@ -8,6 +8,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "cd tests/e2e && gauge run specs/",
     "lint": "vue-cli-service lint"
   },
   "main": "index.js",

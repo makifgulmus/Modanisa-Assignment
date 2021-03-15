@@ -1,0 +1,18 @@
+
+language: node_js
+
+node_js:
+  - "12.13.1"
+
+services:
+  - docker
+
+script:
+  cd backend && npm install && yarn test:unit && yarn test:integration &&
+  cd .. && echo $(ls) && cd frontend && npm install && yarn test:unit
+
+deploy:
+  - provider: script
+    script: bash deploy-frontend.sh && cd .. && cd backend && bash deploy-backend.sh
+    on:
+     all_branches: true
