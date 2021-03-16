@@ -3,6 +3,8 @@ import TodoItems from "../../src/components/TodoItems.vue";
 import moxios from "moxios";
 require("jest-fetch-mock").enableMocks();
 
+var host_url = "http://35.224.219.240";
+
 beforeEach(() => {
   moxios.install();
 });
@@ -25,7 +27,7 @@ describe("Rendering and functioning correctly", () => {
   });
 
   it("calls the fetch method when it gets created", async () => {
-    moxios.stubRequest(`http://35.224.219.240/todos-list`, {
+    moxios.stubRequest(`${host_url}/todos-list`, {
       status: 200,
       response: [
         {
@@ -53,7 +55,7 @@ describe("Rendering and functioning correctly", () => {
         },
       ],
     });
-    moxios.stubRequest("http://35.224.219.240/todo-items", {
+    moxios.stubRequest(`${host_url}/todo-items`, {
       status: 200,
       response: {
         text: "Buy some milk",
@@ -81,7 +83,7 @@ describe("Rendering and functioning correctly", () => {
         },
       ],
     });
-    moxios.stubRequest("http://35.224.219.240/todo-items", {
+    moxios.stubRequest(`${host_url}/todo-items`, {
       status: 200,
       response: {
         msg: "Todo Deleted",

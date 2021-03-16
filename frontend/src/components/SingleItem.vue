@@ -1,17 +1,19 @@
 <template>
   <div class="todoDiv">
-    <span @click="changeTodoStatus()" v-bind:class="{ todoItemDone: isDone }">
+    <p @click="changeTodoStatus()" v-bind:class="{ todoItemDone: isDone }">
       {{ todo.text }}
-    </span>
-    <input
-      type="checkbox"
-      id="checkbox"
-      v-model="checked"
-      @click="changeTodoStatus"
-    />
-    <button @click="deleteItem(todo.text)" type="submit" id="deleteButton">
-      Delete Item
-    </button>
+    </p>
+    <div class="buttonsClass">
+      <input
+        type="checkbox"
+        id="checkbox"
+        v-model="checked"
+        @click="changeTodoStatus"
+      />
+      <button @click="deleteItem(todo.text)" type="submit" id="deleteButton">
+        Delete Item
+      </button>
+    </div>
   </div>
 </template>
 
@@ -40,17 +42,39 @@ export default {
 <style>
 .todoDiv {
   display: flex;
-  justify-content: center;
+  border-style: groove;
+  border-width: 1.5px;
+  border-color: #91b0b7;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonsClass {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .todoItemDone {
   text-decoration: line-through;
 }
 
-span {
+p {
   font-size: 1.2rem;
+  color: white;
+  margin-left: 1rem;
 }
 input[type="checkbox"] {
-  width: 5%;
+  transform: scale(2);
+  -ms-transform: scale(2);
+  -webkit-transform: scale(2);
+  margin: 0;
+}
+
+#deleteButton {
+  display: inline-block;
+  margin-left: 1rem;
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="addItemClass">
     <form>
       <input
         id="todoInput"
         ref="todoInput"
         v-model="newTodo"
-        @keydown.enter="itemAdded(newTodo)"
+        @keydown.enter.prevent="itemAdded(newTodo)"
         placeholder="What to do?"
         type="text"
       />
-      <button @click="itemAdded(newTodo)" type="submit" id="addButton">
+      <button @click.prevent="itemAdded(newTodo)" type="submit" id="addButton">
         Add Item
       </button>
     </form>
@@ -18,6 +18,7 @@
 
 <script>
 import axios from "axios";
+var host_url = process.env.VUE_APP_HOST_URL;
 export default {
   async mounted() {
     this.$refs["todoInput"].focus();
@@ -28,12 +29,20 @@ export default {
     };
   },
   methods: {
-    itemAdded(newTodo) {
+    async itemAdded(newTodo) {
+      console.log(newTodo);
       if (newTodo.length > 1) {
-        axios.post(`${process.env.VUE_APP_HOST_URL}/todo-items`, {
-          text: `${newTodo}`,
-          done: false,
-        });
+        await axios.post(
+          `${host_url}/todo-items`,
+          {
+            text: `${newTodo}`,
+            done: false,
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        window.location.reload();
         this.newTodo = "";
         this.$refs["todoInput"].value = "";
       }
@@ -43,15 +52,20 @@ export default {
 </script>
 
 <style>
+.addItemClass {
+  right: 0;
+}
 form {
   display: flex;
-  justify-content: center;
   margin-bottom: 2rem;
 }
-input {
-  width: 25%;
+#todoInput {
+  background-color: #d5d2d2;
+  border-width: thin;
   height: 2rem;
   font-size: 20px;
+  margin-right: 0.5rem;
+  width: 80%;
 }
 input:focus {
   outline-width: 0;

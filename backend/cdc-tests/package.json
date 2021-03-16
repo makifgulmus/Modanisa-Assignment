@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:consumer": "mocha consumer.js --timeout 20000",
-    "test:provider": "mocha provider.js --timeout 20000",
+    "test:provider": "mocha provider.js --timeout 30000",
     "posttest:consumer": "node publish.pact.js"
   },
   "keywords": [],

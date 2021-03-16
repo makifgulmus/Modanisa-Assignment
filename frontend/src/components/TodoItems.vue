@@ -1,11 +1,13 @@
 <template>
   <div>
-    <ul v-for="todo in todos" :key="todo.text">
-      <single-item
-        :todo="todo"
-        @todo-updated="updateTodo"
-        @todo-deleted="deleteTodo"
-      ></single-item>
+    <ul>
+      <li v-for="todo in todos" :key="todo.text">
+        <single-item
+          :todo="todo"
+          @todo-updated="updateTodo"
+          @todo-deleted="deleteTodo"
+        ></single-item>
+      </li>
     </ul>
   </div>
 </template>
@@ -13,6 +15,7 @@
 <script>
 import axios from "axios";
 import SingleItem from "./SingleItem.vue";
+var host_url = process.env.VUE_APP_HOST_URL;
 export default {
   data() {
     return {
@@ -28,16 +31,14 @@ export default {
   methods: {
     async getTodos() {
       var vm = this;
-      await axios
-        .get(`${process.env.VUE_APP_HOST_URL}/todos-list`)
-        .then(function(response) {
-          response.data.forEach((item) => {
-            vm.todos.push(item);
-          });
+      await axios.get(`${host_url}/todos-list`).then(function(response) {
+        response.data.forEach((item) => {
+          vm.todos.push(item);
         });
+      });
     },
     async updateTodo(todoToUpdate) {
-      await axios.put(`${process.env.VUE_APP_HOST_URL}/todo-items`, {
+      await axios.put(`${host_url}/todo-items`, {
         text: todoToUpdate.text,
         done: todoToUpdate.done,
       });
@@ -48,7 +49,7 @@ export default {
           this.todos.splice(i, 1);
         }
       }
-      await axios.delete(`${process.env.VUE_APP_HOST_URL}/todo-items`, {
+      await axios.delete(`${host_url}/todo-items`, {
         data: {
           text: `${todoToDelete}`,
         },
@@ -58,4 +59,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+ul {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+}
+li {
+  list-style-type: none;
+  margin: 0 0 2rem 0;
+}
+</style>
