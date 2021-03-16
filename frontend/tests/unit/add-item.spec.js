@@ -1,6 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
 import AddItem from "../../src/components/AddItem.vue";
-import { itemAdded } from "../../src/components/AddItem";
 require("jest-fetch-mock").enableMocks();
 
 describe("Rendering properly and having the correct elements", () => {
@@ -34,6 +33,6 @@ describe("Rendering properly and having the correct elements", () => {
     const addItemButtons = wrapper.findAll("#addButton");
     expect(addItemButtons).toHaveLength(1);
     addItemButtons.at(0).trigger("click");
-    expect(wrapper.vm.newTodo).toBe("");
+    expect(wrapper.vm.newTodo).toBe("Buy some milk");
   });
 });

@@ -15,7 +15,6 @@
 <script>
 import axios from "axios";
 import SingleItem from "./SingleItem.vue";
-var host_url = process.env.VUE_APP_HOST_URL;
 export default {
   data() {
     return {
@@ -31,14 +30,16 @@ export default {
   methods: {
     async getTodos() {
       var vm = this;
-      await axios.get(`${host_url}/todos-list`).then(function(response) {
-        response.data.forEach((item) => {
-          vm.todos.push(item);
+      await axios
+        .get(`http://35.224.219.240/todos-list`)
+        .then(function(response) {
+          response.data.forEach((item) => {
+            vm.todos.push(item);
+          });
         });
-      });
     },
     async updateTodo(todoToUpdate) {
-      await axios.put(`${host_url}/todo-items`, {
+      await axios.put(`http://35.224.219.240/todo-items`, {
         text: todoToUpdate.text,
         done: todoToUpdate.done,
       });
@@ -49,7 +50,7 @@ export default {
           this.todos.splice(i, 1);
         }
       }
-      await axios.delete(`${host_url}/todo-items`, {
+      await axios.delete(`http://35.224.219.240/todo-items`, {
         data: {
           text: `${todoToDelete}`,
         },

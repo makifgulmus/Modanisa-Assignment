@@ -17,13 +17,13 @@ describe("todo items existing and rendering correctly", () => {
   });
 
   it("exists and renders as a single todo item with text and done attributes", () => {
-    expect(wrapper.findAll("span").length).toBe(1);
+    expect(wrapper.findAll("p").length).toBe(1);
     const doneBoxes = wrapper.findAll("#checkbox");
     expect(doneBoxes.length).toBe(1);
   });
 
   it("marks item as done when item is clicked", () => {
-    const items = wrapper.findAll("span");
+    const items = wrapper.findAll("p");
     expect(items.length).toBe(1);
     items.trigger("click");
     expect(spy).toHaveBeenCalledTimes(1);

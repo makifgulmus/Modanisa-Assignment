@@ -18,7 +18,6 @@
 
 <script>
 import axios from "axios";
-var host_url = process.env.VUE_APP_HOST_URL;
 export default {
   async mounted() {
     this.$refs["todoInput"].focus();
@@ -30,10 +29,9 @@ export default {
   },
   methods: {
     async itemAdded(newTodo) {
-      console.log(newTodo);
       if (newTodo.length > 1) {
         await axios.post(
-          `${host_url}/todo-items`,
+          `http://35.224.219.240/todo-items`,
           {
             text: `${newTodo}`,
             done: false,
