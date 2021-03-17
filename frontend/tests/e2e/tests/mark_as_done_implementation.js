@@ -4,7 +4,6 @@ const { $, goto, click, text, waitFor, checkBox, isChecked } = require("taiko");
 const assert = require("assert").strict;
 
 step("Given ToDo list with buy some milk item", async () => {
-  await goto("localhost:8080");
   await assert.ok(await text("Buy some milk").exists());
 });
 

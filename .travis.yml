@@ -1,4 +1,3 @@
-
 language: node_js
 
 node_js:
@@ -9,10 +8,11 @@ services:
 
 script:
   cd backend && npm install && yarn test:unit && yarn test:integration && cd .. &&
-  cd frontend && npm install && yarn test:unit
+  cd frontend && npm install && yarn test:unit && cd tests && cd e2e && echo $(ls) &&
+  npm i @getgauge/cli && npm i expect && npm i taiko && yarn test && cd .. && cd ..
 
 deploy:
   - provider: script
     script: bash deploy-frontend.sh && cd .. && cd backend && bash deploy-backend.sh
     on:
-     all_branches: true
+      all_branches: true

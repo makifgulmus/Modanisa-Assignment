@@ -10,10 +10,12 @@ beforeSuite(async () => {
 });
 
 afterSuite(async () => {
+  await click("Delete Item");
   await closeBrowser();
 });
+
 step("When I go to the app, I should see an empty todo form", async () => {
-  await goto("localhost:8080");
+  await goto("http://34.123.28.194/");
   const inputText = await $("#todoInput");
   const addButton = await $("#addButton");
   expect(inputText).toBeTruthy();

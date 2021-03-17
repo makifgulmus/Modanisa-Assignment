@@ -6,7 +6,6 @@ const assert = require("assert").strict;
 step(
   "When I go to the app, I should see a todo list with one item",
   async () => {
-    await goto("localhost:8080");
     const inputText = await $("#todoInput");
     const addButton = await $("#addButton");
     const firstItem = await $(".todoItem");

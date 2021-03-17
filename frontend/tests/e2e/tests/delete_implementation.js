@@ -1,23 +1,13 @@
 "use strict";
 const expect = require("expect");
-const {
-  $,
-  goto,
-  click,
-  text,
-  waitFor,
-  checkBox,
-  isChecked,
-  write,
-  focus,
-  textBox,
-  button,
-} = require("taiko");
+const { $, click, isChecked, write, focus, button } = require("taiko");
 const assert = require("assert").strict;
 
 step("Given ToDo list with rest for a while item", async () => {
-  await click("Delete Item");
-  await click("Delete Item");
+  var deleteButtons = await $("#deleteButton").elements();
+  for (let i = 0; i < deleteButtons.length; i++) {
+    await click("Delete Item");
+  }
   await focus($("#todoInput"));
   await write("Rest for a while");
   await click("Add Item");
