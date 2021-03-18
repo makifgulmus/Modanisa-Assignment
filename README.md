@@ -2,8 +2,10 @@
 <p align="center">
 
   <h1 align="center">Todo Web App For Modanisa Tech Challenge</h1>
-
-
+  
+  <p align="center"> <a href= "https://travis-ci.com/AkifGulmus/Modanisa-Assignment">  <img src="https://travis-ci.com/AkifGulmus/Modanisa-Assignment.svg?branch=main"  width="100" />  </a> </p>
+  
+   
 </p>
 
 
