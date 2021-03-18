@@ -8,8 +8,8 @@ services:
 
 script:
   cd backend && npm install && yarn test:unit && yarn test:integration && cd .. &&
-  cd frontend && npm install && yarn test:unit && cd tests && cd e2e && echo $(ls) &&
-  npm i @getgauge/cli && npm i expect && npm i taiko && yarn test && cd .. && cd ..
+  cd frontend && npm install && yarn test:unit && cd tests/e2e && 
+  npm i @getgauge/cli && npm i expect && npm i taiko && npm install && echo $(ls) && yarn test && cd ../..
 
 deploy:
   - provider: script
