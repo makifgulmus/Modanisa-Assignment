@@ -1,7 +1,8 @@
 <br />
 <p align="center">
-
+  <h1 align="center">:warning:<br>Deprecated. <a href="https://github.com/AkifGulmus/todo-frontend">Frontend</a> and <a href="https://github.com/AkifGulmus/todo-backend">Backend</a> moved to seperate repositories.<br>:warning: </h1>
   <h1 align="center">Todo Web App For Modanisa Tech Challenge</h1>
+  
   
   <p align="center"> <a href= "https://travis-ci.com/AkifGulmus/Modanisa-Assignment">  <img src="https://travis-ci.com/AkifGulmus/Modanisa-Assignment.svg?branch=main"  width="100" />  </a> </p>
   
